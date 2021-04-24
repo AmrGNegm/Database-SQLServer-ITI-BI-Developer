@@ -1,0 +1,12 @@
+1- Display All Data Of Courses which duration greater than 30
+2- Display Full Name of Students which has supervisor
+3- Display StudentNo which has grade greater than 80 on any course
+without duplication
+4- Display Instructor Data which has not degree
+5- Display Instructor Data which work in department number less than 30
+and earn salary greater than 1500
+6- Display Instructor id which has no evaluation without duplication
+7- Display Course ID which has evaluation 'VGood' without duplication
+8- Display First three Courses Data respect to Topic No from smallest to largest
+9- Display First Two Instructors repect to Salary From largest to smallest
+10- Display First one student has greatest age    
