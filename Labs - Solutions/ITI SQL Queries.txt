@@ -1,0 +1,59 @@
+1- Display All Data Of Courses which duration greater than 30
+
+SELECT *
+FROM Course
+WHERE Crs_Duration > 30
+
+2- Display Full Name of Students which has supervisor
+
+SELECT St_Fname + ' ' + St_Lname as "Full Name" , St_super
+FROM Student
+WHERE St_super IS NOT NULL  
+
+3- Display StudentNo which has grade greater than 80 on any course without duplication
+
+SELECT Distinct *
+FROM Stud_Course
+where Grade > 80
+
+4- Display Instructor Data which has not degree
+
+SELECT *
+FROM Instructor
+where Ins_Degree IS NULL
+
+5- Display Instructor Data which work in department number less than 30 and earn salary greater than 1500
+
+SELECT *
+FROM Instructor
+where Dept_Id < 30 AND Salary > 1500
+
+6- Display Instructor id which has no evaluation without duplication
+
+SELECT distinct *
+FROM Ins_Course
+where Evaluation IS NULL
+
+7- Display Course ID which has evaluation 'VGood' without duplication
+
+SELECT distinct *
+FROM Ins_Course
+where Evaluation = 'VGood'
+
+8- Display First three Courses Data respect to Topic No from smallest to largest
+
+SELECT TOP(3) *
+FROM Course
+ORDER BY Top_Id DESC
+
+9- Display First Two Instructors repect to Salary From largest to smallest
+
+SELECT TOP(2) *
+FROM Instructor
+ORDER BY Salary DESC
+
+10- Display First one student has greatest age
+
+SELECT TOP(1) *
+FROM Student
+ORDER BY St_Age DESC

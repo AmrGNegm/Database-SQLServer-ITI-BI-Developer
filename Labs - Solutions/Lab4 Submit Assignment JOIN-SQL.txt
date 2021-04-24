@@ -1,0 +1,108 @@
+Company_SD - DB SQL Problems:
+
+1. Display the Department id, name and id and the name of its manager.
+
+Select Dname, Dnum, MGRSSN, Fname, Lname
+From Departments inner join Employee
+ON MGRSSN = SSN
+
+2. Display the name of the departments and the name of the projects under its control.
+
+Select Departments.Dnum, Dname, Pname 
+From Departments inner join Project
+ON Departments.Dnum = Project.Dnum
+
+3. Display the full data about all the dependence associated with the name of the employee they depend on him/her.
+
+Select Dependent_name, Dependent.sex, Dependent.Bdate, ESSN , Fname, Lname
+From Dependent inner join Employee
+ON ESSN = SSN
+
+4. Display the Id, name and location of the projects in Cairo or Alex city.
+
+Select *
+From Project
+where City in ('Alex','Cairo')
+
+5. Display the Projects full data of the projects with a name starts with "a" letter.
+
+Select *
+From Project
+where Pname like 'a%'
+
+6. display all the employees in department 30 whose salary from 1000 to 2000 LE monthly
+
+Select *
+From Employee
+where Dno = 30
+and Salary between 1000 and 2000
+
+7. Find the names of the employees who directly supervised with Kamel Mohamed.
+
+SELECT *
+from Employee ne, Employee se
+where ne.Superssn = se.SSN
+and se.Fname = 'Kamel'
+
+8. Retrieve the names of all employees and the names of the projects they are working on, sorted by the project name.
+
+Select Fname,Lname, Pname, Pnumber, Plocation
+From Employee , Project , Works_for
+where ESSn = SSN
+and Pno = Pnumber
+order by Pname
+
+
+9. Retrieve a list of employees and the projects they are working on ordered by department and within each department, ordered alphabetically by last name, first name.
+
+Select Fname, Lname, Pname, Pnumber, Pno, Dname, Departments.Dnum
+From Employee , Project , Works_for, Departments
+where ESSn = SSN 
+and Departments.Dnum = Employee.Dno
+and Pno = Pnumber 
+and Departments.Dnum = Project.Dnum
+order by Fname, Lname
+
+10. For each project located in Cairo City , find the project number, the controlling department name ,the department manager last name ,address and birthdate
+
+Select Pname, Pnumber, Plocation, City, Departments.Dnum, Dname, MGRSSN, Fname, Lname, Bdate, Address
+From Project , Departments , Employee
+where Departments.Dnum = Project.Dnum 
+and MGRSSN = SSN
+and Project.City = 'Cairo'
+
+ITI - DB SQL Problems:
+
+1- Display Student Data With Student Supervisor Name
+
+SELECT *
+from Student ns, Student ss
+where ns.St_super = ss.St_Id
+
+2- Display Courses Data With Topic Name
+
+SELECT *
+from Course, Topic
+where Course.Top_Id = Topic.Top_Id
+
+3- Display Instructor Name With Evaluation on Courses with Topic ‘Web’
+
+SELECT Ins_Name , Evaluation, Crs_Name, Topic.Top_Id, Top_Name
+from Instructor, Ins_Course, Course ,Topic
+where Instructor.Ins_Id = Ins_Course.Ins_Id
+and Course.Top_Id = Topic.Top_Id
+and Course.Crs_Id = Ins_Course.Crs_Id
+
+4- Display All Departments data with name of instructor which working in it (Display all departments)
+
+SELECT *
+from Department left outer join Instructor
+on Department.Dept_Id = Instructor.Dept_Id
+
+5- Display Student Full Name With Course Name which he take it with Grade
+
+SELECT Student.St_Fname , Student.St_Lname , Course.Crs_Name , Stud_Course.Grade
+from Student , Stud_Course , Course
+where Student.St_Id = Stud_Course.St_Id
+and Stud_Course.Crs_Id = Course.Crs_Id
+order by Student.St_Id

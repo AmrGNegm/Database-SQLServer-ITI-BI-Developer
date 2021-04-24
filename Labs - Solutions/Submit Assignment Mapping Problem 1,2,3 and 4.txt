@@ -1,0 +1,163 @@
+Problem1 - Mapping:
+
+1- Mapping of Regular entity :
+Musician (ID number PK , Name , Street, City, Phone number)
+Instrument ((Musical key PK , Name)
+Album (Title PK , Copyright date , Identifier)
+Song (Title PK , Author)
+
+2- Mapping of Weak entity:
+Not Changed
+
+3- Mapping 1:1 Relationship:
+Not Changed
+
+4- Mapping 1:M Relationship:
+
+Song (Title PK , Author, Title_album FK)
+Musician (ID number PK , Name , Street, City, Phone number)
+Album (Title PK , Copyright date , Identifier, ID_Num_Musician FK)
+
+5- Mapping N:M Relationship:
+Music_Songs ( (ID_Num_Musician , Title_Song ) PK )
+Music_Instrument ( (ID_Num_Musician , Musical key ) PK )
+
+6- Multi_Value :
+Not Changed
+
+Final DataBase of Problem1:
+
+Song (Title PK , Author, Title_album FK)
+Musician (ID number PK , Name , Street, City, Phone number)
+Album (Title PK , Copyright date , Identifier, ID_NO_Musician FK)
+Instrument (Musical key PK , Name)
+Music_Songs ( (ID_Num_Musician , Title_Song ) PK )
+Music_Instrument ( (ID_Num_Musician , Musical key ) PK )
+
+
+
+Problem2 - Mapping:
+
+1- Mapping of Regular entity :
+Owner ( Owner_ID PK, Name)
+Property ( Property ID PK , State, City, Address, Zip Code)
+Sales Office ( Number Office PK , Location)
+Employee ( Employee ID  PK , Employee Name)
+
+2- Mapping of Weak entity:
+Not Changed
+
+
+3- Mapping 1:1 Relationship:
+ Sales Office ( Number Office PK , Location, Emp_ID FK)
+
+4- Mapping 1:M Relationship:
+Sales Office ( Number Office PK , Location, Emp_ID FK)
+Employee ( Employee ID  PK , Employee Name, Num_Office FK)
+Property ( Property ID PK , State, City, Address, Zip Code, Num_Office FK)
+
+5- Mapping N:M Relationship:
+Own_Property ( ( Owner_ID, Property_ID ) PK ,  Percent )
+
+6- Multi_Value :
+Not Changed
+
+Final DataBase of Problem2:
+Owner ( Owner_ID PK, Name)
+Own_Property ( ( Owner_ID, Property_ID ) PK ,  Percent )
+Sales Office ( Number Office PK , Location, Emp_ID FK)
+Employee ( Employee ID  PK , Employee Name, Num_Office FK)
+Property ( Property ID PK , State, City, Address, Zip Code, Num_Office FK)
+
+
+
+
+Problem3 - Mapping:
+
+1- Mapping of Regular entity :
+Nurse ( Num_Nurse PK , Name, Address )
+Ward ( Ward_ID PK ,Name )
+Consultant ( Cons_ID PK , Name)
+Patient ( Patient_ID , Name , Date_of_Birth )
+Drug ( Code Number PK , Dose , Brand_Name )
+
+2- Mapping of Weak entity:
+Not Changed
+
+3- Mapping 1:1 Relationship:
+Nurse ( Num_Nurse PK , Name, Address )
+Ward ( Ward_ID PK ,Name , Num_Nurse FK )
+
+4- Mapping 1:M Relationship:
+Nurse ( Num_Nurse PK , Name, Address , Ward_ID FK )
+Ward ( Ward_ID PK ,Name , Num_Nurse FK )
+Consultant ( Cons_ID PK , Name)
+Patient ( Patient_ID , Name , Date_of_Birth , Cons_ID FK , Ward_ID FK )
+
+
+5- Mapping N:M Relationship:
+Consultant ( Cons_ID PK , Name)
+Patient ( Patient_ID PK , Name , Date_of_Birth , Cons_ID FK , Ward_ID FK )
+Patient_Consult ( ( Consult_ID , Patient_ID ) PK )
+Patient_treatment ( ( Patient_ID , Num_Nurse , Code Number ) PK , Dose , Date, Time )
+
+
+6- Multi_Value :
+Brand_Drug ( ( Code Number , Brand_Name ) PK )
+Drug ( Code Number PK , Dose )
+
+Final DataBase of Problem3:
+Nurse ( Num_Nurse PK , Name, Address , Ward_ID FK )
+Ward ( Ward_ID PK ,Name , Num_Nurse FK )
+Consultant ( Cons_ID PK , Name)
+Patient ( Patient_ID PK , Name , Date_of_Birth , Cons_ID FK , Ward_ID FK )
+Patient_Consult ( ( Consult_ID , Patient_ID ) PK )
+Patient_treatment ( ( Patient_ID , Num_Nurse , Code Number ) PK , Dose , Date, Time )
+Drug ( Code Number PK , Dose )
+Brand_Drug ( ( Code Number , Brand_Name ) PK )
+
+
+
+Problem4 - Mapping:
+
+1- Mapping of Regular entity :
+Route ( Route_ID PK , Origin , Classification , Distance , Destination)
+Air Craft ( Craft_ID PK , Num_Craft , Model , Capacity )
+Crew ( Major pilot PK , Assistant pilot , Host1 , Host2 )
+Airline ( Airline_ID PK , Name , Address , Name Contact , Telephone )
+Transaction ( Trans_ID PK , Description , Date , Amount_Money )
+Employee ( Emp_ID PK , Name , Gender , Address , Position , Qualification , Day , Month , Year )
+
+2- Mapping of Weak entity:
+Not Changed
+
+3- Mapping 1:1 Relationship:
+
+Crew_Air Craft ( Craft_ID PK , Num_Craft , Model , Capacity , Major pilot , Assistant pilot , Host1 , Host2 , Airline_ID FK )
+
+4- Mapping 1:M Relationship:
+Airline ( Airline_ID PK , Name , Address , Name Contact , Telephone )
+Crew_Air Craft ( Craft_ID PK , Num_Craft , Model , Capacity , Major pilot , Assistant pilot , Host1 , Host2 , Airline_ID FK )
+Transaction ( Trans_ID PK , Description , Date , Amount_Money , Airline_ID FK )
+Employee ( Emp_ID PK , Name , Gender , Address , Position , Qualification , Day , Month , Year , Airline_ID FK )
+
+5- Mapping N:M Relationship:
+Route_AirCraft (( Route_ID ,  Craft_ID ) PK , Num_of_passengers , Flight_time , Price_per_passenger , Departure_date_time , Arrival_date time)
+
+6- Multi_Value :
+Airline_Telephone ( Airline_ID, Telephone)
+Airline ( Airline_ID PK , Name , Address , Name Contact )
+Employee_Qualification ( Emp_ID , Qualification )
+Employee ( Emp_ID PK , Name , Gender , Address , Position , Day , Month , Year , Airline_ID FK )
+
+
+Final DataBase of Problem4:
+
+Employee ( Emp_ID PK , Name , Gender , Address , Position , Day , Month , Year , Airline_ID FK )
+Employee_Qualification ( Emp_ID , Qualification )
+Airline ( Airline_ID PK , Name , Address , Name Contact )
+Airline_Telephone ( Airline_ID, Telephone)
+Route_AirCraft (( Route_ID ,  Craft_ID ) PK , Num_of_passengers , Flight_time , Price_per_passenger , Departure_date_time , Arrival_date time)
+Route ( Route_ID PK , Origin , Classification , Distance , Destination)
+Crew_Air Craft ( Craft_ID PK , Num_Craft , Model , Capacity , Major pilot , Assistant pilot , Host1 , Host2 , Airline_ID FK )
+Transaction ( Trans_ID PK , Description , Date , Amount_Money , Airline_ID FK )
