@@ -1,0 +1,42 @@
+/* First I create database called "Sales" */
+
+CREATE DATABASE Sales
+
+/* Then Create two tables (Sales_office and Employee ) */
+CREATE TABLE Sales_office
+(Sales_Office_Num int , Loc varchar(40), Manger_ID int
+, CONSTRAINT Sals_office_PK Primary Key (Sales_Office_Num) )
+
+Create table Employee
+(Emp_ID int, Emp_name varchar(40), Sales_offNum int,
+CONSTRAINT Emp_ID_PK Primary Key(Emp_ID))
+
+/* Then add two constraint FK to two tables (Sales_office and Employee ) */
+alter table Sales_office
+add constraint Mgr_Emp_FK Foreign Key (Manger_ID)
+references dbo.Employee (Emp_ID)
+
+alter table Employee
+add constraint sales_offc_Nu_FK Foreign Key (Sales_offNum)
+references dbo.Sales_office (Sales_Office_Num)
+
+/* Then Create two tables ( Property, Owner and Property_owner) */
+
+Create table Property
+(Property_ID int, Address_Prop varchar(40), City varchar(40),
+State_prop varchar(40), zip int, Sales_Office_No int,
+constraint Prop_ID_PK Primary Key (Property_ID))
+
+alter table Property
+add constraint sals_office_No_FK Foreign Key (Sales_Office_No)
+references dbo.Sales_office (Sales_Office_Num)
+
+
+Create Table Owner
+(Owner_ID int, Owner_name Varchar(50)
+, constraint Own_ID_PK Primary Key (Owner_ID))
+
+Create table Property_owner
+(Property_ID int, Owner_ID int, Percent_Owned int
+, constraint PropOwn_ID_PK Primary Key (Property_ID, Owner_ID)
+,constraint Percent_Own check (Percent_Owned <= 100))
