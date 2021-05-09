@@ -1,0 +1,97 @@
+1-Insert These Values on Table Course
+ID = 4000 , name = 'Java Script' , duration = 30 , topic = 'web'
+
+Answer1:
+
+INSERT INTO Course
+VALUES (4000,'JavaScript',30,3)
+
+2 - Create Table (crs_cpy) which contains data about courses which have more thsn 40 hours Duration
+
+Answer2:
+
+SELECT * into crs_cpy
+from Course
+where Crs_Duration > 40
+
+3 - update salary to 500 for all instructor without
+Salary , bonus to 200 for all instructor without bonus
+
+Answer3:
+
+UPDATE Instructor
+SET Salary = 500
+WHERE Salary IS NULL
+
+UPDATE Instructor
+SET Bons = 200
+WHERE Bons IS NULL
+
+4 - Update Bonus of Instructor by increase it to 20% of salary 
+which has salary greater than average salary of each department
+
+Answer4:
+
+update Instructor
+
+SET Bons = Salary * 0.2
+
+where Salary > all 
+
+(select avg(salary) 
+
+from Instructor 
+
+group by Dept_Id)
+
+
+
+
+5 - Create View (Vstu) that display full student name which age greater than 23 which has supervisor
+Note: Prevent the users to run the following query 
+"Update Vstu set age= 21
+Where age = 24"
+
+Answer5:
+
+CREATE VIEW Vstu as
+SELECT CONCAT(St_Fname, ' ',  St_Lname) as "Full Name"
+FROM Student
+WHERE St_Age > 23
+and St_super IS NOT NULL 
+
+6 - Display Students Data which has third greatest age on all Students
+
+Answer6:
+
+SELECT *
+FROM (select St_Fname ,St_Lname , DENSE_RANK() over (order by st_Age desc) Rank
+from Student) t
+where Rank = 3
+
+7- Create a view that displays student full name, course name if the student has a grade more than 50.
+
+Answer7:
+
+CREATE VIEW Stud50Gard as
+SELECT CONCAT(St_Fname, ' ',  St_Lname) as "Full Name", Crs_Name, Grade
+FROM Student, Stud_Course, Course
+WHERE Student.St_Id = Stud_Course.St_Id 
+AND Stud_Course.Crs_Id = Course.Crs_Id
+
+8-Create a view that will display the project name and the number of employees work on it.
+“Use Company DB”
+
+Answer8:
+
+CREATE VIEW Projemp as
+SELECT Pname, Pno, count(ESSn) as "Number Of Employee"
+FROM Works_for, Project
+WHERE Works_for.Pno = Project.Pnumber
+group by Pno,Pname
+
+
+
+
+
+

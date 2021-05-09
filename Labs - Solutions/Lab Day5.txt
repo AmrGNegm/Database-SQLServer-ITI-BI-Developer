@@ -1,0 +1,181 @@
+1. Display (Using Union Function)
+a.The name and the gender of the dependence
+that's gender is Female and depending on Female Employee.
+b.And the male dependence that depends on Male Employee.
+
+Answer1:
+
+select Dependent_name  , d.Sex
+from Employee e inner join Dependent d
+on ssn = essn 
+where e.sex = 'f' and d.Sex = 'f' 
+union 
+select Dependent_name , d.Sex 
+from Employee e inner join Dependent d
+on ssn = essn
+where e.sex = 'm' and d.Sex = 'm' 
+
+
+2. For each project, list the project name and the total hours per week (for all employees)
+spent on that project.
+
+Answer2:
+
+
+select Pname , sum(hours) as "Total Hours"
+from Project , Works_for
+where Pno = Pnumber
+group by Pname 
+
+
+3. For each department, retrieve the department name and the maximum,
+minimum and average salary of its employees.
+
+Answer3:
+
+
+select Dname , MAX(salary) Max_salry
+,min (salary) Min_salary
+, avg(isnull(salary,0)) 
+from Departments , Employee
+where Dno = Dnum
+group by Dname
+
+
+4. List the last name of all managers who have no dependents.
+
+Answer4:
+
+select lname 
+from Employee  , Departments 
+where MGRSSN = SSN
+except
+select lname 
+from Employee e , Departments , Dependent d
+where MGRSSN = e.SSN and MGRSSn = d.ESSN
+
+5. For each department -- if its average salary is less than the average salary of all employees
+-- display its number, name and number of its employees.
+
+Answer5:
+
+select dname , dno  , count(ssn) 
+from Employee , Departments
+where Dno = Dnum  
+group by  dname , dno 
+having avg(isnull(salary,0)) <
+(select avg(isnull(salary,0)) 
+from Employee )
+
+
+6.Retrieve number of students who have a value in their age. 
+
+Answer6:
+
+select count(St_Id) as "Number of Students"
+from Student
+where St_Age is not null
+
+7. Get all instructors Names without repetition.
+
+Answer7:
+
+select distinct(Ins_Name)
+from Instructor
+
+8. Display student with the following Format (use isNull function).
+
+Answer8:
+
+select st_id "Student ID" 
+, concat(s.St_Fname ,' ', s.St_Lname) "Student Full Name" ,
+ISNULL(Dept_Name,'No department') "Department Name"
+from Student s , Department d
+where s.Dept_Id = d.Dept_Id
+
+9.Display instructor Name and Department Name.
+Note: display all the instructors if they are attached to a department or not.
+
+Answer9:
+
+select Ins_Name , Dept_Name
+from  Instructor i left outer join Department d
+on i.Dept_Id = d.Dept_Id
+
+10.Display student full name and the name of the course he is taking,
+For only courses which have a grade.
+
+Answer10:
+
+select St_Fname +' ' + St_Lname "Full Name" , 
+c.Crs_Name , grade
+from Student s , Stud_Course sc , Course c
+where s.St_Id = sc.St_Id and
+c.Crs_Id = sc.Crs_Id and sc.Grade is not null
+
+
+11.Display number of courses for each topic name.
+
+Answer11:
+
+select Top_Name , 
+count(Crs_Id) "number of courses"
+from Topic t , Course c
+where t.Top_Id = c.Top_Id
+group by Top_Name
+
+12. Display max and min salary for instructors.
+
+Answer12:
+
+select max(salary) "max salary", min(salary) "min salary"
+from Instructor
+
+13. Display instructors who have salaries less than the average salary of all instructors.
+
+Answer13:
+
+select Ins_Name , Salary
+from Instructor
+where Salary <
+(select AVG(isnull(salary,0)) 
+from Instructor)
+
+14. Display the Department name that contains the instructor who receives the minimum salary.
+
+Answer14:
+
+select Dept_Name , salary
+from Department d, Instructor i
+where d.Dept_Id = i.Dept_Id
+and salary <= (select min(salary) from instructor)
+
+
+15. Select max two salaries in instructor table using union.
+
+Answer15:
+
+select max(salary)
+from Instructor 
+union 
+select max(salary) 
+from Instructor
+where Salary < (select max(Salary) from Instructor)
+
+16. Select instructor name and his salary but if there is no salary display instructor bonus.
+“use one of coalesce Function”
+
+Answer16:
+
+select Ins_Name , 
+coalesce(Salary,0) 
+from Instructor
+
+17. Select Actual Average Salary for instructors.
+
+Answer17:
+
+select avg(isnull(salary,0)) as "Actual Average Salary"
+from Instructor
+
+	
